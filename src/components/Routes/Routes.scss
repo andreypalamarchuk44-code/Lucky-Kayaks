@@ -1,0 +1,778 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+/* ======================================================
+ROUTES
+====================================================== */
+
+.routes {
+
+  background: linear-gradient(
+      180deg,
+      #f7f7f3,
+      #f2f2ec
+  );
+
+  padding-block: clamp(80px,9vw,130px);
+
+  overflow: hidden;
+
+  .container{
+    padding-inline: v.$gutter;
+  }
+
+}
+
+/* ======================================================
+SECTION HEAD
+====================================================== */
+
+.section-head{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:flex-end;
+
+  gap:3rem;
+
+  margin-bottom:4rem;
+
+}
+
+.section-head h2{
+
+  font-family:"Bebas Neue",sans-serif;
+
+  font-size:clamp(3rem,6vw,5rem);
+
+  line-height:.9;
+
+  letter-spacing:-.03em;
+
+  text-transform:uppercase;
+
+  color:#07151B;
+
+}
+
+.section-head__desc{
+
+  max-width:420px;
+
+  font-family:"Inter",sans-serif;
+
+  font-size:1.05rem;
+
+  line-height:1.8;
+
+  color:#66787d;
+
+}
+
+/* ======================================================
+SCROLLER
+====================================================== */
+
+.routes__scroller{
+
+  overflow-x:auto;
+
+  padding-inline:v.$gutter;
+
+  padding-bottom:12px;
+
+  scroll-snap-type:x mandatory;
+
+  scrollbar-width:thin;
+
+}
+
+.routes__scroller::-webkit-scrollbar{
+
+  height:8px;
+
+}
+
+.routes__scroller::-webkit-scrollbar-thumb{
+
+  background:#d7c7a1;
+
+  border-radius:999px;
+
+}
+
+/* ======================================================
+TRACK
+====================================================== */
+
+.routes__track{
+
+  display:grid;
+
+  grid-auto-flow:column;
+
+  grid-auto-columns:340px;
+
+  gap:24px;
+
+  max-width:v.$container-w;
+
+  margin-inline:auto;
+
+}
+
+@include m.from(v.$bp-xl){
+
+.routes__track{
+
+  grid-auto-flow:unset;
+
+  grid-template-columns:repeat(4,1fr);
+
+}
+
+}
+
+/* ======================================================
+ROUTE CARD
+====================================================== */
+
+.route-card{
+
+  position:relative;
+
+  overflow:hidden;
+
+  scroll-snap-align:start;
+
+  display:flex;
+  flex-direction:column;
+
+  min-height:540px;
+
+  padding:2rem;
+
+  border-radius:28px;
+
+  background:rgba(255,255,255,.88);
+
+  backdrop-filter:blur(18px);
+
+  border:1px solid rgba(7,21,27,.08);
+
+  box-shadow:
+      0 20px 45px rgba(7,21,27,.08);
+
+  transition:
+      transform .45s ease,
+      box-shadow .45s ease,
+      border-color .35s ease,
+      background .35s ease;
+
+}
+
+/* Glow */
+
+.route-card::before{
+
+  content:"";
+
+  position:absolute;
+
+  width:260px;
+  height:260px;
+
+  top:-130px;
+  right:-130px;
+
+  border-radius:50%;
+
+  background:
+      radial-gradient(
+          circle,
+          rgba(232,199,106,.22),
+          transparent 72%
+      );
+
+  opacity:0;
+
+  transition:.45s;
+
+}
+
+.route-card:hover{
+
+  transform:translateY(-10px);
+
+  border-color:rgba(232,199,106,.35);
+
+  box-shadow:
+      0 28px 60px rgba(7,21,27,.15);
+
+}
+
+.route-card:hover::before{
+
+  opacity:1;
+
+}
+
+/* ===================================== */
+
+.route-card__top{
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  gap:1rem;
+
+  margin-bottom:1.5rem;
+
+}
+
+/* ===================================== */
+
+.route-card__grade{
+
+  display:inline-flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  padding:.45rem .95rem;
+
+  border-radius:999px;
+
+  font-family:"Inter",sans-serif;
+
+  font-size:.73rem;
+
+  font-weight:700;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  color:#fff;
+
+}
+
+/* ---------- */
+
+.route-card__grade--easy{
+
+  background:#6FA85F;
+
+}
+
+.route-card__grade--nature{
+
+  background:#2E8B72;
+
+}
+
+.route-card__grade--panorama{
+
+  background:#2E73B7;
+
+}
+
+.route-card__grade--sunset{
+
+  background:#D67A2C;
+
+}
+
+/* ===================================== */
+
+.route-card__grade-label{
+
+  font-family:"Inter",sans-serif;
+
+  font-size:.75rem;
+
+  text-transform:uppercase;
+
+  letter-spacing:.05em;
+
+  color:#7A8A90;
+
+}
+
+/* ===================================== */
+
+.route-card h3{
+
+  margin:0 0 1rem;
+
+  font-family:"Bebas Neue",sans-serif;
+
+  font-size:2.2rem;
+
+  line-height:.95;
+
+  letter-spacing:-.02em;
+
+  color:#07151B;
+
+}
+
+/* ===================================== */
+
+.route-card__desc{
+
+  flex:1;
+
+  margin:0;
+
+  font-family:"Inter",sans-serif;
+
+  font-size:1rem;
+
+  line-height:1.85;
+
+  color:#5C6E74;
+
+}
+
+/* ===================================== */
+
+.route-card__stats{
+
+  display:grid;
+
+  grid-template-columns:repeat(3,1fr);
+
+  gap:1rem;
+
+  margin-top:2rem;
+
+  padding-top:1.5rem;
+
+  border-top:1px dashed rgba(0,0,0,.12);
+
+}
+
+.route-card__stats dt{
+
+  margin-bottom:.4rem;
+
+  font-family:"Inter",sans-serif;
+
+  font-size:.72rem;
+
+  font-weight:700;
+
+  letter-spacing:.08em;
+
+  text-transform:uppercase;
+
+  color:#C59A4A;
+
+}
+
+.route-card__stats dd{
+
+  margin:0;
+
+  font-family:"Inter",sans-serif;
+
+  font-size:.96rem;
+
+  font-weight:700;
+
+  line-height:1.5;
+
+  color:#07151B;
+
+}
+
+/* ===================================== */
+
+.route-card__link{
+
+  margin-top:2rem;
+
+  display:flex;
+
+  justify-content:space-between;
+
+  align-items:center;
+
+  font-family:"Inter",sans-serif;
+
+  font-weight:700;
+
+  text-decoration:none;
+
+  color:#07151B;
+
+  transition:.3s;
+
+}
+
+.route-card__link svg{
+
+  color:#D67A2C;
+
+  transition:.3s;
+
+}
+
+.route-card:hover .route-card__link{
+
+  color:#D67A2C;
+
+}
+
+.route-card:hover .route-card__link svg{
+
+  transform:translateX(6px);
+
+}
+
+/* ======================================================
+ANIMATION
+====================================================== */
+
+.route-card{
+
+    opacity:0;
+
+    transform:translateY(40px);
+
+    animation:routeReveal .8s forwards;
+
+}
+
+.route-card:nth-child(2){
+
+    animation-delay:.15s;
+
+}
+
+.route-card:nth-child(3){
+
+    animation-delay:.3s;
+
+}
+
+.route-card:nth-child(4){
+
+    animation-delay:.45s;
+
+}
+
+@keyframes routeReveal{
+
+    to{
+
+        opacity:1;
+
+        transform:translateY(0);
+
+    }
+
+}
+
+/* ======================================================
+LARGE DESKTOP
+====================================================== */
+
+@media (min-width:1600px){
+
+    .routes__track{
+
+        grid-template-columns:repeat(4,1fr);
+
+        gap:28px;
+
+    }
+
+}
+
+/* ======================================================
+LAPTOP
+====================================================== */
+
+@media (max-width:1400px){
+
+    .routes__track{
+
+        grid-auto-columns:320px;
+
+    }
+
+}
+
+/* ======================================================
+TABLET
+====================================================== */
+
+@media (max-width:992px){
+
+    .section-head{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:1.5rem;
+
+        margin-bottom:3rem;
+
+    }
+
+    .section-head__desc{
+
+        max-width:100%;
+
+    }
+
+    .routes__track{
+
+        grid-auto-columns:310px;
+
+    }
+
+}
+
+/* ======================================================
+MOBILE
+====================================================== */
+
+@media (max-width:768px){
+
+    .routes{
+
+        padding-block:70px;
+
+    }
+
+    .routes__scroller{
+
+        padding-inline:18px;
+
+    }
+
+    .routes__track{
+
+        grid-auto-columns:88vw;
+
+        gap:18px;
+
+    }
+
+    .route-card{
+
+        min-height:500px;
+
+        padding:1.6rem;
+
+        border-radius:24px;
+
+    }
+
+    .route-card h3{
+
+        font-size:1.9rem;
+
+    }
+
+    .route-card__desc{
+
+        font-size:.95rem;
+
+        line-height:1.75;
+
+    }
+
+    .route-card__stats{
+
+        gap:.7rem;
+
+    }
+
+}
+
+/* ======================================================
+SMALL MOBILE
+====================================================== */
+
+@media (max-width:576px){
+
+    .routes{
+
+        padding-block:60px;
+
+    }
+
+    .section-head h2{
+
+        font-size:2.8rem;
+
+    }
+
+    .section-head__desc{
+
+        font-size:.95rem;
+
+    }
+
+    .routes__track{
+
+        grid-auto-columns:92vw;
+
+    }
+
+    .route-card{
+
+        min-height:auto;
+
+    }
+
+    .route-card__stats{
+
+        grid-template-columns:1fr;
+
+        gap:1rem;
+
+    }
+
+    .route-card__stats div{
+
+        display:flex;
+
+        justify-content:space-between;
+
+        align-items:center;
+
+        padding-bottom:.6rem;
+
+        border-bottom:1px dashed rgba(0,0,0,.08);
+
+    }
+
+    .route-card__stats dt{
+
+        margin:0;
+
+    }
+
+}
+
+/* ======================================================
+390px
+====================================================== */
+
+@media (max-width:390px){
+
+    .section-head h2{
+
+        font-size:2.35rem;
+
+    }
+
+    .route-card{
+
+        padding:1.3rem;
+
+    }
+
+    .route-card h3{
+
+        font-size:1.65rem;
+
+    }
+
+    .route-card__grade{
+
+        font-size:.62rem;
+
+        padding:.4rem .75rem;
+
+    }
+
+    .route-card__grade-label{
+
+        display:none;
+
+    }
+
+}
+
+/* ======================================================
+REDUCED MOTION
+====================================================== */
+
+@media (prefers-reduced-motion:reduce){
+
+    .route-card{
+
+        animation:none;
+
+        opacity:1;
+
+        transform:none;
+
+    }
+
+    *{
+
+        transition:none !important;
+
+        scroll-behavior:auto !important;
+
+    }
+
+}
+
+/* ======================================================
+PERFORMANCE
+====================================================== */
+
+.route-card{
+
+    will-change:transform;
+
+}
+
+.route-card img{
+
+    display:block;
+
+    max-width:100%;
+
+}
+
+/* ======================================================
+TEXT SELECTION
+====================================================== */
+
+.routes ::selection{
+
+    background:#E8C76A;
+
+    color:#07151B;
+
+}
+
+/* ======================================================
+TEXT RENDERING
+====================================================== */
+
+.routes{
+
+    -webkit-font-smoothing:antialiased;
+
+    -moz-osx-font-smoothing:grayscale;
+
+    text-rendering:optimizeLegibility;
+
+}

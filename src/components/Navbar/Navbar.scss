@@ -1,0 +1,141 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.navbar {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 100;
+  color: v.$paper;
+  transition: background-color v.$t-med v.$ease, box-shadow v.$t-med v.$ease, padding v.$t-med v.$ease;
+  padding-block: 1.4rem;
+
+  &--scrolled {
+    background: rgba(11, 34, 36, 0.86);
+    backdrop-filter: blur(14px);
+    box-shadow: 0 8px 30px -12px rgba(0,0,0,0.4);
+    padding-block: 0.85rem;
+  }
+
+  &__inner {
+    @include m.flex($justify: space-between);
+  }
+
+  &__brand {
+    @include m.flex($gap: 0.55rem);
+    font-family: v.$font-display;
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: v.$paper;
+    letter-spacing: -0.01em;
+
+    em {
+      font-style: normal;
+      color: v.$amber;
+      margin-left: 0.15em;
+    }
+  }
+
+  &__links {
+    @include m.flex($gap: 1.9rem);
+
+    @include m.until(v.$bp-lg) {
+      display: none;
+    }
+
+    a {
+      font-size: 0.92rem;
+      font-weight: 600;
+      opacity: 0.82;
+      transition: opacity v.$t-fast v.$ease;
+      position: relative;
+
+      &:hover { opacity: 1; }
+    }
+  }
+
+  &__actions {
+    @include m.flex($gap: 1.4rem);
+
+    @include m.until(v.$bp-md) {
+      .navbar__phone { display: none; }
+    }
+
+    @include m.until(v.$bp-lg) {
+      display: none;
+    }
+  }
+
+  &__phone {
+    font-family: v.$font-mono;
+    font-size: 0.85rem;
+    opacity: 0.85;
+  }
+
+  &__cta { padding: 0.75em 1.4em; font-size: 0.88rem; }
+
+  &__burger {
+    display: none;
+    @include m.reset-button;
+    @include m.focus-ring;
+    flex-direction: column;
+    gap: 5px;
+    width: 26px;
+    z-index: 200;
+    position: relative;
+
+    @include m.until(v.$bp-lg) {
+      display: flex;
+    }
+
+    span {
+      height: 2px;
+      background: v.$paper;
+      border-radius: 2px;
+      transition: transform v.$t-fast v.$ease, opacity v.$t-fast v.$ease;
+    }
+  }
+
+  &--open &__burger {
+    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    span:nth-child(2) { opacity: 0; }
+    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  }
+
+  &__mobile {
+    position: fixed;
+    inset: 0;
+    background: v.$ink;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2.2rem;
+    padding: 6rem v.$gutter 4rem;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity v.$t-med v.$ease, transform v.$t-med v.$ease;
+
+    nav {
+      @include m.flex($align: flex-start, $dir: column, $gap: 1.3rem);
+
+      a {
+        font-family: v.$font-display;
+        font-size: 2rem;
+        font-weight: 600;
+      }
+    }
+
+    &-phone {
+      font-family: v.$font-mono;
+      opacity: 0.7;
+    }
+  }
+
+  &--open &__mobile {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0);
+  }
+}

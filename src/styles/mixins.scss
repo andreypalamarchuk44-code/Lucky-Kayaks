@@ -1,0 +1,112 @@
+@use 'sass:color';
+@use 'variables' as v;
+
+@mixin container {
+  width: 100%;
+  max-width: v.$container-w;
+  margin-inline: auto;
+  padding-inline: v.$gutter;
+}
+
+@mixin from($bp) {
+  @media (min-width: $bp) {
+    @content;
+  }
+}
+
+@mixin until($bp) {
+  @media (max-width: ($bp - 1px)) {
+    @content;
+  }
+}
+
+@mixin flex($align: center, $justify: flex-start, $gap: 0, $dir: row) {
+  display: flex;
+  flex-direction: $dir;
+  align-items: $align;
+  justify-content: $justify;
+  gap: $gap;
+}
+
+@mixin eyebrow {
+  font-family: v.$font-mono;
+  font-size: v.$fs-mono;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+@mixin reset-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  font: inherit;
+  color: inherit;
+}
+
+@mixin focus-ring {
+  &:focus-visible {
+    outline: 2px solid v.$amber;
+    outline-offset: 3px;
+    border-radius: v.$radius-sm;
+  }
+}
+
+@mixin btn-base {
+  @include reset-button;
+  @include flex($justify: center, $gap: 0.55em);
+  padding: 0.95em 1.7em;
+  border-radius: v.$radius-pill;
+  font-family: v.$font-body;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+  transition: transform v.$t-fast v.$ease, box-shadow v.$t-fast v.$ease, background-color v.$t-fast v.$ease, color v.$t-fast v.$ease, border-color v.$t-fast v.$ease;
+  @include focus-ring;
+
+  &:active { transform: translateY(1px); }
+}
+
+@mixin btn-amber {
+  @include btn-base;
+  background: v.$amber;
+  color: v.$ink;
+  box-shadow: 0 10px 26px -10px rgba(226, 128, 47, 0.55);
+
+  &:hover { background: color.adjust(v.$amber, $lightness: -6%); box-shadow: 0 14px 30px -10px rgba(226, 128, 47, 0.65); }
+}
+
+@mixin btn-ghost-dark {
+  @include btn-base;
+  background: transparent;
+  color: v.$paper;
+  border: 1.5px solid rgba(247, 248, 244, 0.35);
+
+  &:hover { border-color: v.$paper; background: rgba(247, 248, 244, 0.08); }
+}
+
+@mixin btn-ghost-light {
+  @include btn-base;
+  background: transparent;
+  color: v.$ink;
+  border: 1.5px solid rgba(11, 34, 36, 0.25);
+
+  &:hover { border-color: v.$ink; background: rgba(11, 34, 36, 0.06); }
+}
+
+@mixin card-surface {
+  background: v.$paper;
+  border-radius: v.$radius-md;
+  box-shadow: v.$shadow-card;
+}
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}

@@ -1,0 +1,118 @@
+@use 'variables' as v;
+@use 'mixins' as m;
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: v.$font-body;
+  font-size: v.$fs-body;
+  line-height: 1.6;
+  color: v.$granite;
+  background: v.$mist;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4 {
+  font-family: v.$font-display;
+  margin: 0;
+  line-height: 0.98;
+  letter-spacing: -0.01em;
+  color: v.$ink;
+  font-weight: 700;
+}
+
+p { margin: 0; }
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul, ol { margin: 0; padding: 0; list-style: none; }
+
+img { max-width: 100%; display: block; }
+
+button { font-family: inherit; }
+
+section {
+  position: relative;
+}
+
+.container {
+  @include m.container;
+}
+
+.eyebrow {
+  @include m.eyebrow;
+  color: v.$amber;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6em;
+
+  &::before {
+    content: '';
+    width: 22px;
+    height: 1.5px;
+    background: currentColor;
+    display: inline-block;
+  }
+}
+
+.eyebrow--on-dark { color: v.$amber; }
+
+.btn-amber { @include m.btn-amber; }
+.btn-ghost-dark { @include m.btn-ghost-dark; }
+.btn-ghost-light { @include m.btn-ghost-light; }
+
+.section-head {
+  @include m.flex($align: flex-end, $justify: space-between, $gap: 2rem);
+  flex-wrap: wrap;
+  margin-bottom: clamp(2rem, 4vw, 3.5rem);
+
+  h2 { max-width: 20ch; }
+
+  &__desc {
+    max-width: 34ch;
+    color: v.$granite-60;
+    font-size: 1.02rem;
+  }
+}
+
+// selection color, tiny brand detail
+::selection {
+  background: v.$amber;
+  color: v.$ink;
+}
+
+// utility visually-hidden
+.sr-only { @include m.visually-hidden; }
+
+:root { color-scheme: light; }
+body { min-width: 320px; }
+main { overflow: clip; }
+[id] { scroll-margin-top: 88px; }
+input, select, textarea, button { min-width: 0; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button, [role='button'] { touch-action: manipulation; }
+@media (max-width: 640px) {
+  body { font-size: 1rem; }
+  .section-head { align-items:flex-start; }
+  .section-head h2 { max-width:100%; }
+  .section-head__desc { max-width:100%; }
+}

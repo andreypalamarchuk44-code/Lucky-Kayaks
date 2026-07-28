@@ -1,0 +1,23 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+.footer { background:v.$ink; color:v.$teal-light; padding-top:clamp(3rem,6vw,5rem); }
+.footer__inner { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr); gap:clamp(2rem,5vw,4.5rem); padding-bottom:3rem; border-bottom:1px solid rgba(247,248,244,.12); }
+.footer__left { display:flex; flex-direction:column; gap:2.4rem; min-width:0; }
+.footer__links { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem; }
+.footer__brand p { max-width:38ch; font-size:.92rem; margin-top:1rem; }
+.footer__logo { @include m.flex($gap:.5rem); font-family:v.$font-display; font-size:1.4rem; color:v.$paper; }
+.footer__logo em { font-style:normal; color:v.$amber; margin-left:.15em; }
+.footer__col { display:flex; flex-direction:column; gap:.75rem; min-width:0; }
+.footer__col h4 { color:v.$paper; font-size:.8rem; text-transform:uppercase; letter-spacing:.05em; margin-bottom:.3rem; font-family:v.$font-body; }
+.footer__col a { font-size:.9rem; overflow-wrap:anywhere; transition:color v.$t-fast v.$ease; }
+.footer__col a:hover { color:v.$amber; }
+.footer__map { display:flex; flex-direction:column; gap:1.2rem; min-width:0; padding:clamp(1.2rem,3vw,1.8rem); border-radius:24px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); }
+.footer__map-head span { color:v.$amber; font-size:.8rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700; }
+.footer__map-head h4 { margin:.4rem 0; font-size:1.5rem; line-height:1.1; color:#fff; }
+.footer__map iframe { width:100%; height:clamp(250px,34vw,340px); border:0; border-radius:18px; }
+.footer__route-btn { display:inline-flex; align-items:center; justify-content:center; align-self:flex-start; padding:14px 24px; border-radius:999px; background:linear-gradient(135deg,#FFC85A,#E2802F); color:#081418; font-weight:700; transition:.3s; box-shadow:0 12px 30px rgba(226,128,47,.25); }
+.footer__route-btn:hover { transform:translateY(-3px); box-shadow:0 18px 40px rgba(226,128,47,.35); }
+.footer__bottom { @include m.flex($justify:space-between,$gap:1rem); flex-wrap:wrap; padding-block:1.6rem; font-size:.78rem; color:rgba(111,179,170,.7); }
+@media (max-width:900px) { .footer__inner { grid-template-columns:1fr; } }
+@media (max-width:640px) { .footer__links { grid-template-columns:repeat(2,minmax(0,1fr)); } .footer__bottom { flex-direction:column; align-items:flex-start; } .footer__route-btn { width:100%; } }
+@media (max-width:420px) { .footer__links { grid-template-columns:1fr; } }

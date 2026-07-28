@@ -1,0 +1,732 @@
+@use "../../styles/variables" as v;
+@use "../../styles/mixins" as m;
+
+/* ==========================================================
+   ABOUT
+========================================================== */
+
+.about {
+  position: relative;
+  overflow: hidden;
+
+  padding: clamp(90px, 10vw, 140px) 0;
+
+  background: linear-gradient(
+    180deg,
+    #07151B 0%,
+    #0B1F27 100%
+  );
+
+  color: #fff;
+}
+
+/* декоративне світло */
+
+.about::before {
+  content: "";
+
+  position: absolute;
+
+  width: 700px;
+  height: 700px;
+
+  top: -300px;
+  right: -250px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(232, 199, 106, .08),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+.about::after {
+  content: "";
+
+  position: absolute;
+
+  width: 550px;
+  height: 550px;
+
+  left: -220px;
+  bottom: -220px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(105,208,216,.08),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* ==========================================================
+   CONTAINER
+========================================================== */
+
+.about .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* ==========================================================
+   HEADER
+========================================================== */
+
+.about__header {
+  max-width: 780px;
+
+  margin: 0 auto 70px;
+
+  text-align: center;
+}
+
+/* ==========================================================
+   EYEBROW
+========================================================== */
+
+.about .eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  gap: .7rem;
+
+  margin-bottom: 1.8rem;
+
+  padding: .55rem 1rem;
+
+  border-radius: 999px;
+
+  background: rgba(10,20,24,.45);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(18px);
+
+  font-family: "Inter", sans-serif;
+  font-size: .75rem;
+  font-weight: 700;
+
+  letter-spacing: .18em;
+  text-transform: uppercase;
+
+  color: #69D0D8;
+}
+
+.about .eyebrow::before {
+  content: "";
+
+  width: 8px;
+  height: 8px;
+
+  border-radius: 50%;
+
+  background: #E8C76A;
+
+  box-shadow: 0 0 16px rgba(232,199,106,.7);
+}
+
+/* ==========================================================
+   TITLE
+========================================================== */
+
+.about__header h2 {
+  margin: 0 auto;
+
+  max-width: 12ch;
+
+  font-family: "Bebas Neue", sans-serif;
+
+  font-size: clamp(3rem, 6vw, 5.8rem);
+
+  font-weight: 700;
+
+  line-height: .92;
+
+  letter-spacing: -.03em;
+
+  text-transform: uppercase;
+
+  color: #fff;
+
+  text-wrap: balance;
+
+  text-shadow:
+    0 8px 24px rgba(0,0,0,.35),
+    0 18px 40px rgba(0,0,0,.4);
+}
+
+/* ==========================================================
+   LEAD
+========================================================== */
+
+.about__lead {
+  margin: 2rem auto 0;
+
+  max-width: 52ch;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: clamp(1.05rem, 1vw + .6rem, 1.3rem);
+
+  line-height: 1.85;
+
+  color: rgba(255,255,255,.78);
+}
+
+/* ==========================================================
+   DECORATIVE LINE
+========================================================== */
+
+.about__header::after {
+  content: "";
+
+  display: block;
+
+  width: 90px;
+  height: 3px;
+
+  margin: 2.5rem auto 0;
+
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    #69D0D8,
+    #E8C76A
+  );
+}
+/* ==========================================================
+   CARDS GRID
+========================================================== */
+
+.about__cards {
+  display: grid;
+
+  grid-template-columns: repeat(3, 1fr);
+
+  gap: 2rem;
+
+  margin-top: 4rem;
+}
+
+/* ==========================================================
+   CARD
+========================================================== */
+
+.about__card {
+  position: relative;
+
+  overflow: hidden;
+
+  padding: 2.2rem;
+
+  border-radius: 28px;
+
+  background: rgba(255, 255, 255, .05);
+
+  border: 1px solid rgba(255, 255, 255, .08);
+
+  backdrop-filter: blur(22px);
+
+  transition:
+    transform .45s ease,
+    border-color .35s ease,
+    background .35s ease,
+    box-shadow .35s ease;
+
+  will-change: transform;
+}
+
+/* Glow */
+
+.about__card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 240px;
+  height: 240px;
+
+  top: -120px;
+  right: -120px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(232,199,106,.12),
+    transparent 70%
+  );
+
+  opacity: 0;
+
+  transition: opacity .4s ease;
+}
+
+/* Bottom line */
+
+.about__card::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: 0;
+
+  width: 100%;
+  height: 3px;
+
+  transform: scaleX(0);
+  transform-origin: left;
+
+  background: linear-gradient(
+    90deg,
+    #69D0D8,
+    #E8C76A
+  );
+
+  transition: transform .35s ease;
+}
+
+/* Hover */
+
+.about__card:hover {
+
+  transform: translateY(-10px);
+
+  border-color: rgba(232,199,106,.28);
+
+  background: rgba(255,255,255,.08);
+
+  box-shadow:
+    0 20px 50px rgba(0,0,0,.25);
+}
+
+.about__card:hover::before {
+
+  opacity: 1;
+
+}
+
+.about__card:hover::after {
+
+  transform: scaleX(1);
+
+}
+
+/* ==========================================================
+   ICON
+========================================================== */
+
+.about__icon {
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 70px;
+  height: 70px;
+
+  margin-bottom: 1.6rem;
+
+  border-radius: 22px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(232,199,106,.18),
+    rgba(105,208,216,.12)
+  );
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  font-size: 2rem;
+
+  transition:
+    transform .35s ease,
+    background .35s ease;
+}
+
+.about__card:hover .about__icon {
+
+  transform: rotate(-8deg) scale(1.08);
+
+  background: linear-gradient(
+    135deg,
+    rgba(232,199,106,.3),
+    rgba(105,208,216,.22)
+  );
+
+}
+
+/* ==========================================================
+   CARD TITLE
+========================================================== */
+
+.about__card h3 {
+
+  margin: 0 0 1rem;
+
+  font-family: "Bebas Neue", sans-serif;
+
+  font-size: 2rem;
+
+  font-weight: 700;
+
+  letter-spacing: .03em;
+
+  color: #fff;
+
+}
+
+/* ==========================================================
+   CARD TEXT
+========================================================== */
+
+.about__card p {
+
+  margin: 0;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: 1rem;
+
+  line-height: 1.8;
+
+  color: rgba(255,255,255,.76);
+
+}
+
+/* ==========================================================
+   CARD ANIMATION
+========================================================== */
+
+.about__card {
+
+  opacity: 0;
+
+  transform: translateY(40px);
+
+  animation: aboutCardReveal .8s forwards;
+
+}
+
+.about__card:nth-child(2) {
+
+  animation-delay: .15s;
+
+}
+
+.about__card:nth-child(3) {
+
+  animation-delay: .3s;
+
+}
+
+@keyframes aboutCardReveal {
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+/* ==========================================================
+   QUOTE
+========================================================== */
+
+.about__quote {
+  position: relative;
+
+  max-width: 900px;
+
+  margin: 5rem auto 0;
+
+  padding: 3rem;
+
+  text-align: center;
+
+  border-radius: 32px;
+
+  background: rgba(255,255,255,.05);
+
+  border: 1px solid rgba(255,255,255,.08);
+
+  backdrop-filter: blur(24px);
+
+  overflow: hidden;
+}
+
+.about__quote::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background:
+    radial-gradient(
+      circle at top right,
+      rgba(232,199,106,.10),
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at bottom left,
+      rgba(105,208,216,.08),
+      transparent 45%
+    );
+
+  pointer-events: none;
+}
+
+.about__quote span {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 80px;
+  height: 80px;
+
+  margin-bottom: 1.5rem;
+
+  border-radius: 50%;
+
+  background: rgba(232,199,106,.12);
+
+  border: 1px solid rgba(232,199,106,.25);
+
+  font-size: 2rem;
+
+  color: #E8C76A;
+}
+
+.about__quote p {
+  position: relative;
+
+  z-index: 2;
+
+  margin: 0 auto;
+
+  max-width: 28ch;
+
+  font-family: "Inter", sans-serif;
+
+  font-size: clamp(1.2rem, 2vw, 1.7rem);
+
+  line-height: 1.8;
+
+  font-weight: 500;
+
+  color: rgba(255,255,255,.9);
+}
+
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media (max-width: 992px) {
+
+  .about__cards {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .about__header h2 {
+    max-width: 100%;
+  }
+
+}
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media (max-width: 768px) {
+
+  .about {
+    padding: 80px 0;
+  }
+
+  .about__header {
+    margin-bottom: 50px;
+  }
+
+  .about__cards {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .about__card {
+    padding: 1.8rem;
+  }
+
+  .about__icon {
+    width: 62px;
+    height: 62px;
+
+    font-size: 1.8rem;
+  }
+
+  .about__card h3 {
+    font-size: 1.8rem;
+  }
+
+  .about__quote {
+    margin-top: 4rem;
+
+    padding: 2rem;
+  }
+
+  .about__quote span {
+    width: 65px;
+    height: 65px;
+
+    font-size: 1.6rem;
+  }
+
+}
+
+/* ==========================================================
+   SMALL MOBILE
+========================================================== */
+
+@media (max-width: 576px) {
+
+  .about {
+
+    padding: 70px 0;
+
+  }
+
+  .about .eyebrow {
+
+    font-size: .68rem;
+
+    letter-spacing: .15em;
+
+  }
+
+  .about__header h2 {
+
+    font-size: clamp(2.4rem, 13vw, 3.6rem);
+
+  }
+
+  .about__lead {
+
+    font-size: 1rem;
+
+  }
+
+  .about__card {
+
+    border-radius: 22px;
+
+    padding: 1.5rem;
+
+  }
+
+  .about__icon {
+
+    width: 56px;
+    height: 56px;
+
+    font-size: 1.6rem;
+
+    margin-bottom: 1.2rem;
+
+  }
+
+  .about__card h3 {
+
+    font-size: 1.6rem;
+
+  }
+
+  .about__card p {
+
+    font-size: .95rem;
+
+  }
+
+  .about__quote {
+
+    padding: 1.8rem;
+
+    border-radius: 24px;
+
+  }
+
+  .about__quote p {
+
+    font-size: 1.1rem;
+
+    line-height: 1.7;
+
+  }
+
+}
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .about *,
+  .about *::before,
+  .about *::after {
+
+    animation: none !important;
+    transition: none !important;
+
+  }
+
+}
+
+/* ==========================================================
+   SELECTION
+========================================================== */
+
+.about ::selection {
+
+  background: #E8C76A;
+
+  color: #07151B;
+
+}
+
+/* ==========================================================
+   PERFORMANCE
+========================================================== */
+
+.about__card,
+.about__quote {
+
+  will-change: transform;
+
+}
+
+/* ==========================================================
+   TEXT RENDERING
+========================================================== */
+
+.about {
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  text-rendering: optimizeLegibility;
+
+}

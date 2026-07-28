@@ -1,0 +1,70 @@
+// ============================================================
+// LUCKY KAYAKS — DESIGN TOKENS
+// Palette pulled from the Southern Bug canyon at first light:
+// cold granite water, deep pine ink, warm amber sunrise flare.
+// ============================================================
+
+// Colors — core
+$ink:        #0B2224; // near-black teal, primary text / darkest bg
+$deep:       #123638; // deep water, secondary dark section bg
+$deep-2:     #17454A; // slightly lighter deep, for layered cards on dark
+$teal:       #2F7D77; // brand mid teal, links / mid accents
+$teal-light: #6FB3AA; // pale teal, on-dark secondary text
+
+$mist:       #ECEFE8; // cool pale mist, main light bg (NOT warm cream)
+$mist-2:     #E1E5DA; // slightly deeper mist, card bg on light
+$paper:      #F7F8F4; // near-white, lightest surface
+
+$amber:      #E2802F; // sunrise accent — CTAs, highlights
+$amber-dark: #C4661C; // amber hover / pressed
+$sand:       #C9BCA3; // rope / sand, muted borders & dividers
+
+$granite:    #3B4A48; // body text on light backgrounds
+$granite-60: rgba(59, 74, 72, 0.6);
+
+// Whitewater grading colors (used on Routes cards — real river-grading scale)
+$grade-easy:   #6E9B5E;
+$grade-mid:    #D8A23A;
+$grade-hard:   #C2542F;
+
+// Typography
+$font-display: 'Big Shoulders Display', sans-serif;
+$font-body:    'Karla', sans-serif;
+$font-mono:    'Space Mono', monospace;
+
+// Type scale (fluid via clamp in global.scss mixins)
+$fs-hero:   clamp(3.2rem, 7vw + 1rem, 8rem);
+$fs-h1:     clamp(2.4rem, 4vw + 1rem, 4.2rem);
+$fs-h2:     clamp(1.9rem, 2.4vw + 1rem, 3rem);
+$fs-h3:     clamp(1.3rem, 1vw + 1rem, 1.7rem);
+$fs-body:   1.0625rem;
+$fs-small:  0.875rem;
+$fs-mono:   0.8rem;
+
+// Spacing
+$space-section: clamp(4.5rem, 8vw, 9rem);
+$container-w: 1240px;
+$gutter: clamp(1.25rem, 4vw, 3rem);
+
+// Radius
+$radius-sm: 6px;
+$radius-md: 14px;
+$radius-lg: 28px;
+$radius-pill: 999px;
+
+// Shadows
+$shadow-soft: 0 20px 60px -20px rgba(11, 34, 36, 0.35);
+$shadow-card: 0 10px 30px -12px rgba(11, 34, 36, 0.25);
+
+// Breakpoints
+$bp-xs: 420px;
+$bp-sm: 640px;
+$bp-md: 860px;
+$bp-lg: 1080px;
+$bp-xl: 1320px;
+
+// Transitions
+$ease: cubic-bezier(0.22, 1, 0.36, 1);
+$t-fast: 0.2s;
+$t-med: 0.45s;
+$t-slow: 0.8s;

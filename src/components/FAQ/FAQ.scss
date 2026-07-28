@@ -1,0 +1,70 @@
+@use '../../styles/variables' as v;
+@use '../../styles/mixins' as m;
+
+.faq {
+  background: v.$mist;
+  padding-block: v.$space-section;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 0.8fr 1.2fr;
+    gap: clamp(2rem, 5vw, 4rem);
+
+    @include m.until(v.$bp-md) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  &__intro {
+    h2 { margin-block: 0.8rem 1rem; }
+
+    &-text {
+      color: v.$granite-60;
+      max-width: 36ch;
+      margin-bottom: 1.6rem;
+    }
+  }
+
+  &__item {
+    border-bottom: 1px solid rgba(59, 74, 72, 0.18);
+
+    &:first-child { border-top: 1px solid rgba(59, 74, 72, 0.18); }
+  }
+
+  &__question {
+    @include m.reset-button;
+    @include m.focus-ring;
+    @include m.flex($justify: space-between, $gap: 1rem);
+    width: 100%;
+    padding-block: 1.3rem;
+    text-align: left;
+    font-family: v.$font-display;
+    font-size: 1.15rem;
+    color: v.$ink;
+    font-weight: 600;
+  }
+
+  &__icon {
+    flex-shrink: 0;
+    color: v.$amber;
+    font-size: 1.4rem;
+    line-height: 1;
+    width: 1.4rem;
+    text-align: center;
+  }
+
+  &__answer {
+    display: grid;
+    transition: grid-template-rows v.$t-med v.$ease;
+    overflow: hidden;
+
+    &-inner { overflow: hidden; }
+
+    p {
+      color: v.$granite-60;
+      padding-bottom: 1.4rem;
+      max-width: 60ch;
+      font-size: 0.98rem;
+    }
+  }
+}

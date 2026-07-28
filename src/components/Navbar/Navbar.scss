@@ -1,65 +1,113 @@
 @use '../../styles/variables' as v;
 @use '../../styles/mixins' as m;
 
+body.menu-open {
+  overflow: hidden;
+}
+
 .navbar {
   position: fixed;
-  inset-inline: 0;
   top: 0;
-  z-index: 100;
-  color: v.$paper;
-  transition: background-color v.$t-med v.$ease, box-shadow v.$t-med v.$ease, padding v.$t-med v.$ease;
-  padding-block: 1.4rem;
+  left: 0;
+  right: 0;
+  z-index: 9999;
 
+  width: 100%;
+  padding-block: 1.25rem;
+
+  color: v.$paper;
+  background: transparent;
+
+  transition:
+    padding v.$t-med v.$ease,
+    background-color v.$t-med v.$ease,
+    box-shadow v.$t-med v.$ease;
+
+  /*
+   * Важливо:
+   * тут немає backdrop-filter.
+   * Саме він ламав fixed-меню після скролу.
+   */
   &--scrolled {
-    background: rgba(11, 34, 36, 0.86);
-    backdrop-filter: blur(14px);
-    box-shadow: 0 8px 30px -12px rgba(0,0,0,0.4);
-    padding-block: 0.85rem;
+    padding-block: 0.75rem;
+    background: rgba(11, 34, 36, 0.97);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.18);
+  }
+
+  &--open {
+    background: #071c1d;
+    box-shadow: none;
   }
 
   &__inner {
-    @include m.flex($justify: space-between);
+    position: relative;
+    z-index: 10002;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
   }
 
   &__brand {
-    @include m.flex($gap: 0.55rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+
+    flex-shrink: 0;
+
+    color: v.$paper;
     font-family: v.$font-display;
     font-size: 1.4rem;
     font-weight: 700;
-    color: v.$paper;
-    letter-spacing: -0.01em;
+    line-height: 1;
+    letter-spacing: -0.02em;
+
+    svg {
+      flex-shrink: 0;
+    }
 
     em {
-      font-style: normal;
-      color: v.$amber;
       margin-left: 0.15em;
+      color: v.$amber;
+      font-style: normal;
     }
   }
 
   &__links {
-    @include m.flex($gap: 1.9rem);
+    display: flex;
+    align-items: center;
+    gap: 1.9rem;
+
+    a {
+      position: relative;
+
+      color: v.$paper;
+      font-size: 0.92rem;
+      font-weight: 600;
+      white-space: nowrap;
+      opacity: 0.82;
+
+      transition:
+        color v.$t-fast v.$ease,
+        opacity v.$t-fast v.$ease;
+
+      &:hover,
+      &:focus-visible {
+        color: v.$amber;
+        opacity: 1;
+      }
+    }
 
     @include m.until(v.$bp-lg) {
       display: none;
     }
-
-    a {
-      font-size: 0.92rem;
-      font-weight: 600;
-      opacity: 0.82;
-      transition: opacity v.$t-fast v.$ease;
-      position: relative;
-
-      &:hover { opacity: 1; }
-    }
   }
 
   &__actions {
-    @include m.flex($gap: 1.4rem);
-
-    @include m.until(v.$bp-md) {
-      .navbar__phone { display: none; }
-    }
+    display: flex;
+    align-items: center;
+    gap: 1.4rem;
 
     @include m.until(v.$bp-lg) {
       display: none;
@@ -67,75 +115,277 @@
   }
 
   &__phone {
+    color: v.$paper;
     font-family: v.$font-mono;
     font-size: 0.85rem;
+    white-space: nowrap;
     opacity: 0.85;
   }
 
-  &__cta { padding: 0.75em 1.4em; font-size: 0.88rem; }
+  &__cta {
+    padding: 0.75em 1.4em;
+    font-size: 0.88rem;
+    white-space: nowrap;
+  }
 
   &__burger {
-    display: none;
     @include m.reset-button;
     @include m.focus-ring;
+
+    position: relative;
+    z-index: 10003;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
     gap: 5px;
-    width: 26px;
-    z-index: 200;
-    position: relative;
+
+    flex-shrink: 0;
+
+    width: 44px;
+    height: 44px;
+    padding: 10px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
 
     @include m.until(v.$bp-lg) {
       display: flex;
     }
 
     span {
+      display: block;
+
+      width: 20px;
       height: 2px;
+
+      border-radius: 999px;
       background: v.$paper;
-      border-radius: 2px;
-      transition: transform v.$t-fast v.$ease, opacity v.$t-fast v.$ease;
+
+      transform-origin: center;
+
+      transition:
+        transform v.$t-fast v.$ease,
+        opacity v.$t-fast v.$ease;
     }
   }
 
   &--open &__burger {
-    span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-    span:nth-child(2) { opacity: 0; }
-    span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    span:nth-child(2) {
+      opacity: 0;
+    }
+
+    span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
   }
 
   &__mobile {
     position: fixed;
-    inset: 0;
-    background: v.$ink;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 10001;
+
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2.2rem;
-    padding: 6rem v.$gutter 4rem;
-    transform: translateY(-8px);
+    justify-content: space-between;
+
+    width: 100%;
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    padding:
+      6.5rem
+      clamp(1rem, 6vw, 2rem)
+      max(2rem, env(safe-area-inset-bottom));
+
+    overflow-x: hidden;
+    overflow-y: auto;
+
+    color: v.$paper;
+
+    background:
+      radial-gradient(
+        circle at 90% 5%,
+        rgba(226, 128, 47, 0.16),
+        transparent 35%
+      ),
+      linear-gradient(
+        145deg,
+        #071c1d 0%,
+        #0b2224 55%,
+        #07191a 100%
+      );
+
+    visibility: hidden;
     opacity: 0;
     pointer-events: none;
-    transition: opacity v.$t-med v.$ease, transform v.$t-med v.$ease;
+
+    transition:
+      opacity 250ms ease,
+      visibility 250ms ease;
 
     nav {
-      @include m.flex($align: flex-start, $dir: column, $gap: 1.3rem);
+      display: flex;
+      flex-direction: column;
+      width: 100%;
 
       a {
-        font-family: v.$font-display;
-        font-size: 2rem;
-        font-weight: 600;
-      }
-    }
+        display: flex;
+        align-items: center;
 
-    &-phone {
-      font-family: v.$font-mono;
-      opacity: 0.7;
+        width: 100%;
+        padding: 0.85rem 0;
+
+        color: v.$paper;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+        font-family: v.$font-display;
+        font-size: clamp(1.5rem, 7vw, 2.3rem);
+        font-weight: 600;
+        line-height: 1.1;
+
+        transition:
+          color v.$t-fast v.$ease,
+          padding-left v.$t-fast v.$ease;
+
+        &:hover,
+        &:focus-visible {
+          color: v.$amber;
+          padding-left: 0.35rem;
+        }
+      }
     }
   }
 
   &--open &__mobile {
+    visibility: visible;
     opacity: 1;
     pointer-events: auto;
-    transform: translateY(0);
+  }
+
+  &__mobile-bottom {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1rem;
+
+    width: 100%;
+    padding-top: 2rem;
+  }
+
+  &__mobile-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    min-height: 52px;
+
+    text-align: center;
+  }
+
+  &__mobile-phone {
+    color: v.$paper;
+    font-family: v.$font-mono;
+    font-size: 0.95rem;
+    opacity: 0.75;
+  }
+}
+
+@media (max-width: 600px) {
+  .navbar {
+    padding-block: 1rem;
+
+    &--scrolled {
+      padding-block: 0.7rem;
+    }
+
+    &__brand {
+      font-size: 1.1rem;
+
+      svg {
+        width: 31px;
+        height: 31px;
+      }
+    }
+
+    &__mobile {
+      padding-top: 6rem;
+
+      nav a {
+        padding-block: 0.7rem;
+        font-size: clamp(1.4rem, 7vw, 1.9rem);
+      }
+    }
+  }
+}
+
+@media (max-width: 360px) {
+  .navbar {
+    &__brand {
+      font-size: 0.98rem;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    &__burger {
+      width: 40px;
+      height: 40px;
+    }
+
+    &__mobile {
+      padding-inline: 1rem;
+
+      nav a {
+        padding-block: 0.58rem;
+        font-size: 1.3rem;
+      }
+    }
+  }
+}
+
+// Mobile/tablet
+@media (max-width: 1079px) {
+  .navbar__links,
+  .navbar__actions {
+    display: none;
+  }
+
+  .navbar__burger {
+    display: flex;
+  }
+}
+
+// Desktop
+@media (min-width: 1080px) {
+  .navbar__burger,
+  .navbar__mobile {
+    display: none;
+  }
+
+  .navbar__links,
+  .navbar__actions {
+    display: flex;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .navbar,
+  .navbar__burger span,
+  .navbar__mobile,
+  .navbar__mobile nav a {
+    transition: none;
   }
 }
